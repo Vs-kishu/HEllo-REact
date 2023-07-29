@@ -2,19 +2,13 @@ import React, { useEffect, useState } from "react";
 import { RESTRO_INFO_API } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { json, useParams } from "react-router-dom";
+import useResInfo from "../utils/useResInfo";
 
 const RestroInfo = () => {
   const { restroId } = useParams();
-  const [ResInfo, setResInfo] = useState(null);
-  useEffect(() => {
-    fetchResInfo();
-  }, []);
 
-  const fetchResInfo = async () => {
-    const Data = await fetch(RESTRO_INFO_API + restroId);
-    const json = await Data.json();
-    setResInfo(json.data);
-  };
+  const ResInfo = useResInfo(restroId);
+
   if (ResInfo === null) return <Shimmer />;
 
   const { name, cuisines, costForTwoMessage } =
