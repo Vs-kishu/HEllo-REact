@@ -4,33 +4,21 @@ class UserCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      score: 0,
-      point: 1,
+      userinfo: {},
     };
-    console.log(this.props.name + "constructor"); // called only once when component is created and mounted to the DOM
   }
-  componentDidMount() {
-    console.log(this.props.name + "usr mounted");
+  async componentDidMount() {
+    const data = await fetch("https://api.github.com/users/vs-kishu");
+    const json = await data.json();
+    this.setState({ userinfo: json });
   }
   render() {
-    const { score, point } = this.state;
-    console.log(this.props.name + "render");
+    const { name, location, avatar_url } = this.state.userinfo;
     return (
       <div className="user-card">
-        <h2>Name: {this.props.name}</h2>
-        <h3>Location : ballia</h3>
-        <p>your score :{score} </p>
-        <p>your point : {point}</p>
-        <button
-          onClick={() => {
-            this.setState({
-              score: score + 1,
-              point: point * 3,
-            });
-          }}
-        >
-          increase score
-        </button>
+        <img src={avatar_url} alt="" />
+        <h2>Name: {name}</h2>
+        <h3>Location : {location}</h3>
       </div>
     );
   }
