@@ -62,3 +62,9 @@
     border-radius: 10px;
     background-color: rgba(128, 128, 128, 0.422);
 }
+.user-card{
+    background-color: rgba(88, 146, 241, 0.56);
+    width: 10em;
+    height: 10em;
+    padding: 5px;
+}

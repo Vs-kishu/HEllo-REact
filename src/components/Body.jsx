@@ -1,8 +1,8 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-// import resList from "../utils/mockData";
-
+import { ALL_RESTRO } from "../utils/constants";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [listOfRestaurants, setListOfRestraunt] = useState([]);
   const [filteredRestro, setFilteredRestro] = useState([]);
@@ -13,23 +13,21 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.3164945&lng=78.03219179999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(ALL_RESTRO);
     const json = await data.json();
+    console.log(json);
     setListOfRestraunt(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestro(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
-    console.log;
   };
+  console.log(listOfRestaurants);
 
-  if (listOfRestaurants.length === 0) {
-    return <Shimmer />;
-  }
-  return (
+  return listOfRestaurants?.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <div>
@@ -54,17 +52,22 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (res) => res.data.avgRating > 4
+              (res) => res.info.avgRating > 4
             );
-            setListOfRestraunt(filteredList);
+            setFilteredRestro(filteredList);
           }}
         >
           Top Rated Restaurants
         </button>
       </div>
       <div className="res-container">
-        {filteredRestro.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+        {filteredRestro?.map((restaurant) => (
+          <Link
+            key={restaurant.info.id}
+            to={`restroInfo/${restaurant.info.id}`}
+          >
+            <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>
