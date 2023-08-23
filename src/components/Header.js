@@ -1,4 +1,3 @@
-import { LOGO_URL } from "../utils/constants";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -21,9 +20,12 @@ const Header = () => {
   console.log(cartItems);
 
   return (
-    <div className="flex justify-between px-5 bg-gradient-to-r from-blue-600">
+    <div className="flex items-center  px-5 bg-gradient-to-r w-full justify-between from-blue-600">
       <div className="logo-container flex gap-5 items-center">
-        <img className="h-20" src={logo} alt="logo" />
+        <Link to={"/"}>
+          {" "}
+          <img className="h-[100px] w-[100px]" src={logo} alt="logo" />
+        </Link>
 
         <div className="search m-4 p-4 flex items-center">
           <label>UserName : </label>
@@ -37,7 +39,7 @@ const Header = () => {
       <span className="fixed bottom-3 z-50 bg-gradient-to-r from-black to-gray-300 text-white rounded-lg border-2 animate-bounce  px-4 font-semibold">
         Online Status: {onlineStatus ? "🟢" : "🔴"}
       </span>
-      <div className="flex items-center gap-3">
+      <div className="max-lg:hidden flex items-center gap-3">
         <ul className="flex items-center gap-4  font-semibold">
           <li>
             <Link to="/">Home</Link>
