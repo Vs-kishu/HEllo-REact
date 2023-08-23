@@ -24,8 +24,6 @@ const Body = () => {
     const data = await fetch(
       "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.3176452&lng=82.9739144&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-    console.log("here");
-    console.log(data);
 
     const json = await data.json();
 
@@ -47,8 +45,6 @@ const Body = () => {
       </h1>
     );
 
-  console.log(listOfRestaurants);
-
   return listOfRestaurants === undefined || listOfRestaurants.length === 0 ? (
     <Shimmer type="bodyShimmer" />
   ) : (
@@ -68,7 +64,6 @@ const Body = () => {
             onClick={() => {
               // Filter the restraunt cards and update the UI
               // searchText
-              console.log(searchText);
 
               const filteredRestaurant = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())

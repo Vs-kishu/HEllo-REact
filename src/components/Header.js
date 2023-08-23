@@ -13,11 +13,8 @@ const Header = () => {
 
   const { loggedInUser, setUserName } = useContext(UserContext);
 
-  //console.log(loggedInUser);
-
   // Subscribing to the store using a Selector
   const cartItems = useSelector((store) => store.cart.items);
-  console.log(cartItems);
 
   return (
     <div className="flex items-center  px-5 bg-gradient-to-r w-full justify-between from-blue-600">
