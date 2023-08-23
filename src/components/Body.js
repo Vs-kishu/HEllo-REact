@@ -47,25 +47,24 @@ const Body = () => {
       </h1>
     );
 
-  const { loggedInUser, setUserName } = useContext(UserContext);
   console.log(listOfRestaurants);
 
   return listOfRestaurants === undefined || listOfRestaurants.length === 0 ? (
-    <Shimmer />
+    <Shimmer type="bodyShimmer" />
   ) : (
     <div className="body">
-      <div className="filter flex">
+      <div className="w-full px-10 flex justify-between">
         <div className="search m-4 p-4">
           <input
             type="text"
-            className="border border-solid border-black"
+            className="border border-solid p-2 rounded-lg border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="px-4 py-2 bg-green-100 m-4 rounded-lg"
+            className="px-4 py-2 bg-gradient-to-r from-blue-500 to-gray-300 text-white font-semibold hover:text-gray-600 m-4 rounded-lg"
             onClick={() => {
               // Filter the restraunt cards and update the UI
               // searchText
@@ -78,12 +77,12 @@ const Body = () => {
               setFilteredRestaurant(filteredRestaurant);
             }}
           >
-            Search
+            Search restaurant
           </button>
         </div>
         <div className="search m-4 p-4 flex items-center">
           <button
-            className="px-4 py-2 bg-gray-100 rounded-lg"
+            className="px-4 py-2 bg-gradient-to-r from-blue-500 to-gray-300 hover:text-white rounded-lg"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating > 4
@@ -93,14 +92,6 @@ const Body = () => {
           >
             Top Rated Restaurants
           </button>
-        </div>
-        <div className="search m-4 p-4 flex items-center">
-          <label>UserName : </label>
-          <input
-            className="border border-black p-2"
-            value={loggedInUser}
-            onChange={(e) => setUserName(e.target.value)}
-          />
         </div>
       </div>
       <div className="flex flex-wrap">

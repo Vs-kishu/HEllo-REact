@@ -12,7 +12,8 @@ const Header = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  const { loggedInUser } = useContext(UserContext);
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   //console.log(loggedInUser);
 
   // Subscribing to the store using a Selector
@@ -21,8 +22,17 @@ const Header = () => {
 
   return (
     <div className="flex justify-between px-5 bg-gradient-to-r from-blue-600">
-      <div className="logo-container">
+      <div className="logo-container flex gap-5 items-center">
         <img className="h-20" src={logo} alt="logo" />
+
+        <div className="search m-4 p-4 flex items-center">
+          <label>UserName : </label>
+          <input
+            className="border border-black p-2"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+        </div>
       </div>
       <span className="fixed bottom-3 z-50 bg-gradient-to-r from-black to-gray-300 text-white rounded-lg border-2 animate-bounce  px-4 font-semibold">
         Online Status: {onlineStatus ? "🟢" : "🔴"}
