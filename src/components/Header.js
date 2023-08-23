@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
+import logo from "../../Public/Foodlogo.svg";
+import { RiShoppingCart2Fill } from "react-icons/ri";
 
 const Header = () => {
   const [btnNameReact, setBtnNameReact] = useState("Login");
@@ -18,27 +20,34 @@ const Header = () => {
   console.log(cartItems);
 
   return (
-    <div className="flex justify-between bg-pink-100 shadow-lg sm:bg-yellow-50 lg:bg-green-50">
+    <div className="flex justify-between px-5 bg-gradient-to-r from-blue-600">
       <div className="logo-container">
-        <img className="w-56" src={LOGO_URL} />
+        <img className="h-20" src={logo} alt="logo" />
       </div>
-      <div className="flex items-center">
-        <ul className="flex p-4 m-4">
-          <li className="px-4">Online Status: {onlineStatus ? "✅" : "🔴"}</li>
-          <li className="px-4">
+      <span className="fixed bottom-3 z-50 bg-gradient-to-r from-black to-gray-300 text-white rounded-lg border-2 animate-bounce  px-4 font-semibold">
+        Online Status: {onlineStatus ? "🟢" : "🔴"}
+      </span>
+      <div className="flex items-center gap-3">
+        <ul className="flex items-center gap-4  font-semibold">
+          <li>
             <Link to="/">Home</Link>
           </li>
-          <li className="px-4">
+          <li>
             <Link to="/about">About Us</Link>
           </li>
-          <li className="px-4">
+          <li>
             <Link to="/contact">Contact Us</Link>
           </li>
-          <li className="px-4">
+          <li>
             <Link to="/grocery">Grocery</Link>
           </li>
-          <li className="px-4 font-bold text-xl">
-            <Link to="/cart">Cart - ({cartItems.length} items)</Link>
+          <li className="relative font-bold text-3xl ">
+            <Link to="/cart" className="flex">
+              <RiShoppingCart2Fill />{" "}
+              <span className="absolute text-sm px-1 bg-slate-400 rounded-full -right-2 -top-3">
+                {cartItems.length}
+              </span>
+            </Link>
           </li>
           <button
             className="login"
@@ -50,8 +59,6 @@ const Header = () => {
           >
             {btnNameReact}
           </button>
-
-          <li className="px-4 ">{loggedInUser}</li>
         </ul>
       </div>
     </div>

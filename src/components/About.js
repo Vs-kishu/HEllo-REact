@@ -18,10 +18,8 @@ class About extends Component {
     //console.log("Parent Render");
 
     return (
-      <div>
-        <h1>About Class Component</h1>
+      <div className="flex flex-col justify-center items-center">
         <div>
-          LoggedIn User
           <UserContext.Consumer>
             {({ loggedInUser }) => (
               <h1 className="text-xl font-bold">{loggedInUser}</h1>

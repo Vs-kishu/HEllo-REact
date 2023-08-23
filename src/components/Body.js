@@ -22,8 +22,10 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.3176452&lng=82.9739144&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.3176452&lng=82.9739144&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
+    console.log("here");
+    console.log(data);
 
     const json = await data.json();
 
@@ -46,8 +48,9 @@ const Body = () => {
     );
 
   const { loggedInUser, setUserName } = useContext(UserContext);
+  console.log(listOfRestaurants);
 
-  return listOfRestaurants.length === 0 ? (
+  return listOfRestaurants === undefined || listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
